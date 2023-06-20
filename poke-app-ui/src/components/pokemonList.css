@@ -1,0 +1,10 @@
+.pokemon-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-sort-container {
+    display: flex;
+    margin-bottom: 1.5em;
+    justify-content: space-between;
+}

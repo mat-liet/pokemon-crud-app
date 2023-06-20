@@ -1,0 +1,12 @@
+.card {
+    width: 100em;
+}
+
+.card-body {
+    text-align: center;
+}
+
+.card-img-top {
+    width: 10em;
+    height: 20em;
+}
