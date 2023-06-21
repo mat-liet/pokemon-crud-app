@@ -1,12 +1,14 @@
 .card {
     width: 100em;
+    margin-bottom: 1em;
+    padding: 1em;
+    flex: 0 1 32%
 }
 
 .card-body {
     text-align: center;
 }
 
-.card-img-top {
-    width: 10em;
-    height: 20em;
+.btn-pokemon-card {
+    margin: .5em;
 }

@@ -1,6 +1,8 @@
 .pokemon-list {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+
 }
 
 .filter-sort-container {

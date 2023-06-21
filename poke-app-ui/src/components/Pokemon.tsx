@@ -50,10 +50,10 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
                     <h5>Name: {pokemon.name}</h5>
                     <p>Type: {pokemon.type}</p>
                     <p>Moves: {pokemon.moves}</p>
-                    <button className='btn btn-success' onClick={() => setShowModal(true)}>More info</button>
+                    <button className='btn btn-success btn-pokemon-card' onClick={() => setShowModal(true)}>More info</button>
                     <PokemonDetail showModal={showModal} setShowModal={setShowModal} pokemon={pokemon}/>
-                    <button className='btn btn-primary' onClick={handleEdit}>Edit</button>
-                    <button className='btn btn-danger' onClick={() => handleDelete(pokemon.id)}>Delete</button>
+                    <button className='btn btn-primary btn-pokemon-card' onClick={handleEdit}>Edit</button>
+                    <button className='btn btn-danger btn-pokemon-card' onClick={() => handleDelete(pokemon.id)}>Delete</button>
                 </div>
             </div>
         )
