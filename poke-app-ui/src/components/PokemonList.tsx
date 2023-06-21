@@ -1,5 +1,5 @@
 import Pokemon from './Pokemon'
-import './pokemonList.css';
+import './PokemonList.css';
 import PokemonModel from '../models/Pokemon';
 import axios from 'axios';
 import { useState } from 'react';
@@ -44,7 +44,7 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
 
     return (
         <div className='container'>
-            <div className="container filter-sort-container">
+            <div className="filter-sort-container">
                 <div className="row g-3 align-items-center filter-area">
                     <div className="col-auto">
                         <label htmlFor="nameFilter" className="col-form-label">Filter by name:</label>
@@ -70,7 +70,7 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
                     </div>
                 </div>
             </div>
-            <div className='container pokemon-list'>
+            <div className='pokemon-list'>
                 {pokemons.sort(sortMethods[sortField].method).map((pokemonInList) => <Pokemon key={pokemonInList.id} pokemon={pokemonInList} pokemonList={pokemons} setPokemons={props.setPokemons} />)}
             </div>
         </div>

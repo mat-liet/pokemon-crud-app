@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './pokemon.css';
+import './Pokemon.css';
 import axios from 'axios';
 import EditPokemon from './EditPokemon';
 import PokemonModel from '../models/Pokemon';
