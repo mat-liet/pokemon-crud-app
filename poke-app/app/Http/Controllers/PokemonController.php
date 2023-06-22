@@ -12,7 +12,7 @@ class PokemonController extends Controller
         $pokemon = new Pokemon();
         $pokemon->name = $request->name;
         $pokemon->type = $request->type;
-        $pokemon->moves = $request->moves;
+        $pokemon->move = $request->move;
         $pokemon->save();
         return response()->json($pokemon);
     }
@@ -45,7 +45,7 @@ class PokemonController extends Controller
             $pokemon = Pokemon::find($id);
             $pokemon->name = is_null($request->name) ? $pokemon->name : $request->name;
             $pokemon->type = is_null($request->type) ? $pokemon->type : $request->type;
-            $pokemon->moves = is_null($request->moves) ? $pokemon->moves : $request->moves;
+            $pokemon->move = is_null($request->move) ? $pokemon->move : $request->move;
             $pokemon->save();
             return response()->json([
                 'message' => "Pokemon with id $id updated."

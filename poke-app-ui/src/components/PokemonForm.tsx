@@ -3,7 +3,7 @@ import axios from 'axios';
 import Pokemon from "../models/Pokemon";
 
 export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: any, searchString: string }) {
-    const [pokemon, setPokemon] = useState({ id: 0, name: "", type: "Bug", moves: [""] });
+    const [pokemon, setPokemon] = useState({ id: 0, name: "", type: "Bug", move: "" });
 
     const handleChange = (event: any) => {
         setPokemon({ ...pokemon, [event.target.name]: event.target.value });
@@ -59,8 +59,8 @@ export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: a
                     </select>
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="moves" className="form-label">Pokemon moves</label>
-                    <input type="text" placeholder="Pokemon moves" className="form-control" name="moves" onChange={handleChange} />
+                    <label htmlFor="moves" className="form-label">Signature move</label>
+                    <input type="text" placeholder="Signature move" className="form-control" name="move" onChange={handleChange} />
                 </div>
                 <button type="submit" className="btn btn-primary">Add pokemon</button>
             </form>

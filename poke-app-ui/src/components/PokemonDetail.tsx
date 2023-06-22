@@ -21,7 +21,6 @@ function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: 
                 setDetail(response.data)
             })
             .catch(error => {
-                console.log(error)
                 setErroredResponse(true)
             })
     }, [setDetail])

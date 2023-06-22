@@ -2,13 +2,13 @@ class Pokemon {
     id: number;
     name: string;
     type: string;
-    moves: string[];
+    move: string;
    
-    constructor(id: number, name: string, type: string, moves: string[]) {
+    constructor(id: number, name: string, type: string, move: string) {
       this.id = id;
       this.name = name;
       this.type = type;
-      this.moves = moves;
+      this.move = move;
     }
 
 }

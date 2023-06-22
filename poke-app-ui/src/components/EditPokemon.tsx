@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import Pokemon from '../models/Pokemon';
+import './EditPokemon.css'
 
 function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any, setPokemons: any }) {
     const pokemon = props.pokemon
     const pokemonList = props.pokemonList
 
-    const [edittedPokemon, setPokemon] = useState({ name: pokemon.name, type: pokemon.type, moves: pokemon.moves });
+    const [edittedPokemon, setPokemon] = useState({ name: pokemon.name, type: pokemon.type, move: pokemon.move });
 
     const handleChange = (event: any) => {
         setPokemon({ ...edittedPokemon, [event.target.name]: event.target.value });
@@ -24,7 +25,7 @@ function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any,
                 if (pokemonInList.id === pokemon.id) {
                     pokemonInList.name = edittedPokemon.name
                     pokemonInList.type = edittedPokemon.type
-                    pokemonInList.moves = edittedPokemon.moves
+                    pokemonInList.move = edittedPokemon.move
                 }
                 return pokemonInList;
             })
@@ -42,7 +43,6 @@ function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any,
 
     return (
         <div className='card'>
-            <img src="https://d2x6j2p7.rocketcdn.me/wp-content/uploads/2019/08/How-to-draw-Pikachu-1.jpg" alt="" className='card-img-top' />
             <div className='card-body'>
             <form action="submit" onSubmit={handleSubmit}>
             <h5>Name</h5>
@@ -67,10 +67,10 @@ function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any,
                     <option value="Steel">Steel</option>
                     <option value="Water">Water</option>
                 </select>
-                <p>Moves</p>
-                <input type="text" placeholder="Pokemon moves" value={edittedPokemon.moves} className="form-control" name='moves' onChange={handleChange} />
-                <button type='submit' className='btn btn-primary'>Save</button>
-                <button className='btn btn-danger' onClick={handleCancel}>Cancel</button>
+                <p>Signature move</p>
+                <input type="text" placeholder="Signature move" value={edittedPokemon.move} className="form-control" name='move' onChange={handleChange} />
+                <button type='submit' className='btn btn-primary btn-edit'>Save</button>
+                <button className='btn btn-danger btn-edit' onClick={handleCancel}>Cancel</button>
             </form>
             </div>
         </div>

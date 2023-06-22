@@ -7,7 +7,7 @@ import PokemonList from './components/PokemonList';
 
 function App() {
 
-  const [pokemons, setPokemons] = useState([{ id: 0, name: "", type: "", moves: [""] }]);
+  const [pokemons, setPokemons] = useState([{ id: 0, name: "", type: "", move: "" }]);
 
   const [searchString, setSearchString] = useState("");
 
