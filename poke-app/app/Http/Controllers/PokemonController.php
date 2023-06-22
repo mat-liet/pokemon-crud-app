@@ -4,35 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pokemon;
+use App\Services\PokemonService;
 use Illuminate\Support\Facades\DB;
 
 class PokemonController extends Controller
 {
-    public function create(Request $request) {
-        $pokemon = new Pokemon();
-        $pokemon->name = $request->name;
-        $pokemon->type = $request->type;
-        $pokemon->move = $request->move;
-        $pokemon->save();
-        return response()->json($pokemon);
+
+    private PokemonService $pokemonService;
+
+    public function __construct(PokemonService $pokemonService)
+    {
+        $this->pokemonService = $pokemonService;
+    }
+    public function create(Request $request)
+    {
+        return response()->json($this->pokemonService->create($request->name, $request->type, $request->move));
     }
 
-    public function list(Request $request) {
-        if ($request->has('filter_name')) {
-            $pokemon = DB::table('pokemon')
-                ->where('name', 'like', "%$request->filter_name%")
-                ->get();
-            return response()->json($pokemon);
+    public function list(Request $request)
+    {
+        if ($request->has('filter_name') && $request->filter_name !== null) {
+            return response()->json($this->pokemonService->listFiltered($request->filter_name));
         } else {
-            $pokemon = Pokemon::all();
-            return response()->json($pokemon);
+            return response()->json($this->pokemonService->listAll());
         }
     }
 
-    public function find($id) {
-        if (Pokemon::where('id', $id)->exists()) {
-            $pokemon = Pokemon::find($id);
-            return response()->json($pokemon);
+    public function find($id)
+    {
+        $pokemon = $this->pokemonService->find($id);
+        if ($pokemon !== null) {
+            return response()->json($this->pokemonService->find($id));
         } else {
             return response()->json([
                 'message' => "Pokemon with id $id not found."
@@ -40,13 +42,10 @@ class PokemonController extends Controller
         }
     }
 
-    public function update(Request $request, $id) {
-        if (Pokemon::where('id', $id)->exists()) {
-            $pokemon = Pokemon::find($id);
-            $pokemon->name = is_null($request->name) ? $pokemon->name : $request->name;
-            $pokemon->type = is_null($request->type) ? $pokemon->type : $request->type;
-            $pokemon->move = is_null($request->move) ? $pokemon->move : $request->move;
-            $pokemon->save();
+    public function update(Request $request, $id)
+    {
+        $updatedSuccessfully = $this->pokemonService->update($id, $request->name, $request->type, $request->move);
+        if ($updatedSuccessfully) {
             return response()->json([
                 'message' => "Pokemon with id $id updated."
             ], 200);
@@ -57,9 +56,10 @@ class PokemonController extends Controller
         }
     }
 
-    public function delete($id) {
-        if (Pokemon::where('id', $id)->exists()) {
-            Pokemon::where('id', $id)->delete();
+    public function delete($id)
+    {
+        $deletedSuccessfully = $this->pokemonService->delete($id);
+        if ($deletedSuccessfully) {
             return response()->json([
                 'message' => "Pokemon with id $id deleted."
             ], 200);
