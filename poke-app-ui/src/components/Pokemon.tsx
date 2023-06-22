@@ -46,9 +46,9 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
         return (
             <div key={pokemon.id} className='card'>
                 <div className='card-body'>
-                    <h5>Name: {pokemon.name}</h5>
-                    <p>Type: {pokemon.type}</p>
-                    <p>Signature move: {pokemon.move}</p>
+                    <h5 className='card-title'>Name: {pokemon.name}</h5>
+                    <p className='card-text'>Type: {pokemon.type}</p>
+                    <p className='card-text'>Signature move: {pokemon.move}</p>
                     <button className='btn btn-success btn-pokemon-card' onClick={() => setShowModal(true)}>More info</button>
                     <PokemonDetail showModal={showModal} setShowModal={setShowModal} pokemon={pokemon}/>
                     <button className='btn btn-primary btn-pokemon-card' onClick={handleEdit}>Edit</button>
