@@ -45,7 +45,6 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
     } else {
         return (
             <div key={pokemon.id} className='card'>
-                <img src="https://d2x6j2p7.rocketcdn.me/wp-content/uploads/2019/08/How-to-draw-Pikachu-1.jpg" alt="" className='card-img-top' />
                 <div className='card-body'>
                     <h5>Name: {pokemon.name}</h5>
                     <p>Type: {pokemon.type}</p>

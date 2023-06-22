@@ -30,10 +30,10 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
     };
 
     const handleFilter = (event: any) => {
-        console.log("Pokemon filtered");
         axios
             .get("http://localhost:8000/api/pokemon", { params: { filter_name: props.searchString } })
             .then(response => {
+                console.log("Pokemon filtered");
                 props.setPokemons(response.data)
                 console.log(response)
             })
