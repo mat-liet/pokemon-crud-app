@@ -42,8 +42,8 @@ function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any,
     }
 
     return (
-        <div className='card'>
-            <div className='card-body'>
+        <div className="card">
+            <div className="card-body">
             <form action="submit" onSubmit={handleSubmit}>
             <h5>Name</h5>
                 <input type="text" placeholder="Pokemon name" value={edittedPokemon.name} className="form-control" name="name" onChange={handleChange} />
@@ -69,8 +69,8 @@ function EditPokemon(props: { pokemon: Pokemon, showEdit: any, pokemonList: any,
                 </select>
                 <p>Signature move</p>
                 <input type="text" placeholder="Signature move" value={edittedPokemon.move} className="form-control" name='move' onChange={handleChange} />
-                <button type='submit' className='btn btn-primary btn-edit'>Save</button>
-                <button className='btn btn-danger btn-edit' onClick={handleCancel}>Cancel</button>
+                <button type="submit" className="btn btn-primary btn-edit">Save</button>
+                <button className="btn btn-danger btn-edit" onClick={handleCancel}>Cancel</button>
             </form>
             </div>
         </div>

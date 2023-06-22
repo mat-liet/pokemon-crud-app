@@ -43,8 +43,8 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
     }
 
     return (
-        <div className='container'>
-            <div className="filter-sort-container">
+        <div className="container">
+            <div className="filter-sort-container container">
                 <div className="row g-3 align-items-center filter-area">
                     <div className="col-auto">
                         <label htmlFor="nameFilter" className="col-form-label">Filter by name:</label>
@@ -53,7 +53,7 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
                         <input type="text" name="searchString" className="form-control" onChange={handleChange} />
                     </div>
                     <div className="col-auto">
-                        <button className='btn btn-primary' onClick={handleFilter}>Filter</button>
+                        <button className="btn btn-primary" onClick={handleFilter}>Filter</button>
                     </div>
                 </div>
                 <div className="row g-3 align-items-center filter-area">
@@ -70,7 +70,7 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
                     </div>
                 </div>
             </div>
-            <div className='pokemon-list'>
+            <div className="pokemon-list">
                 {pokemons.sort(sortMethods[sortField].method).map((pokemonInList) => <Pokemon key={pokemonInList.id} pokemon={pokemonInList} pokemonList={pokemons} setPokemons={props.setPokemons} />)}
             </div>
         </div>

@@ -9,7 +9,7 @@ function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: 
 
     const pokemon: Pokemon = props.pokemon
 
-    const [detail, setDetail] = useState({ weight: "", height: "", stats: [{ base_stat: "", stat: { name: "" } }] });
+    const [detail, setDetail] = useState({ weight: "", height: "", stats: [{ base_stat: "", stat: { name: "" } }], sprites: { front_default: "" } });
 
     const [erroredResponse, setErroredResponse] = useState(false);
 
@@ -45,18 +45,23 @@ function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: 
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='container'>
-                        <h5>Physical attributes</h5>
-                        <p>Weight: {Number(detail.weight) / 10}kg</p>
-                        <p>Height: {Number(detail.height) * 10}cm</p>
+                    <div className="container">
+                        <div className="image-and-text-container">
+                            <div>
+                                <h5>Physical attributes</h5>
+                                <p>Weight: {Number(detail.weight) / 10}kg</p>
+                                <p>Height: {Number(detail.height) * 10}cm</p>
+                            </div>
+                            <img src={detail.sprites.front_default} alt=""  className='sprite-img'/>
+                        </div>
                         <hr />
                         <h5>Stats</h5>
                         <div>
-                            <ul className='list-group'>
+                            <ul className="list-group">
                                 {detail.stats.map((stat) => {
                                     return (
                                         <div>
-                                            <li className='list-group-item'>{capitalizeFirstLetter(stat.stat.name)} : {stat.base_stat}
+                                            <li className="list-group-item">{capitalizeFirstLetter(stat.stat.name)} : {stat.base_stat}
                                                 <ProgressBar className="progress" min={0} max={255} now={Number(stat.base_stat)}></ProgressBar>
                                             </li>
 

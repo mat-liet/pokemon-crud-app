@@ -34,7 +34,7 @@ export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: a
             <form action="submit" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Pokemon name</label>
-                    <input type="text" placeholder="Pokemon name" className="form-control" name="name" onChange={handleChange} />
+                    <input type="text" placeholder="Pokemon name" className="form-control" name="name" onChange={handleChange} required/>
                 </div>
                 <div className="mb-3">
                     <label htmlFor="type" className="form-label">Pokemon type</label>
@@ -60,7 +60,7 @@ export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: a
                 </div>
                 <div className="mb-3">
                     <label htmlFor="moves" className="form-label">Signature move</label>
-                    <input type="text" placeholder="Signature move" className="form-control" name="move" onChange={handleChange} />
+                    <input type="text" placeholder="Signature move" className="form-control" name="move" onChange={handleChange} required />
                 </div>
                 <button type="submit" className="btn btn-primary">Add pokemon</button>
             </form>
