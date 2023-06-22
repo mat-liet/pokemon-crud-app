@@ -14,10 +14,10 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
     const [sortField, setSortField] = useState("nameAsc");
 
     const sortMethods: sortOptions = {
-        nameAsc: { method: (a: PokemonModel, b: PokemonModel) => (a.name > b.name) ? 1 : -1 },
-        nameDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.name > b.name) ? -1 : 1 },
-        typeAsc: { method: (a: PokemonModel, b: PokemonModel) => (a.type > b.type) ? 1 : -1 },
-        typeDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.type > b.type) ? -1 : 1 },
+        nameAsc: { method: (a: PokemonModel, b: PokemonModel) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1 },
+        nameDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.name.toLowerCase() > b.name.toLowerCase()) ? -1 : 1 },
+        typeAsc: { method: (a: PokemonModel, b: PokemonModel) => (a.type.toLowerCase() > b.type.toLowerCase()) ? 1 : -1 },
+        typeDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.type.toLowerCase() > b.type.toLowerCase()) ? -1 : 1 },
       };
 
     const handleChange = (event: any) => {

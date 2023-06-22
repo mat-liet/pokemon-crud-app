@@ -15,10 +15,6 @@ use App\Http\Controllers\PokemonController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::post('/pokemon', [PokemonController::class, 'create']);
 Route::get('/pokemon', [PokemonController::class, 'list']);
 Route::get('/pokemon/{id}', [PokemonController::class, 'find']);
