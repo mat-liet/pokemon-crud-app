@@ -1,15 +1,17 @@
 import Pokemon from './Pokemon'
 import './PokemonList.css';
 import PokemonModel from '../models/Pokemon';
-import axios from 'axios';
 import { useState } from 'react';
+import Pagination from './Pagination';
 
-function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, searchString: string, setSearchString: any }) {
+function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, searchString: string, setSearchString: any, page: Number, setPage: any }) {
     type sortOptions = {
         [key: string]: any
     }
 
     const pokemons: PokemonModel[] = props.pokemons
+
+    const page: Number = props.page
 
     const [sortField, setSortField] = useState("nameAsc");
 
@@ -18,29 +20,18 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
         nameDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.name.toLowerCase() > b.name.toLowerCase()) ? -1 : 1 },
         typeAsc: { method: (a: PokemonModel, b: PokemonModel) => (a.type.toLowerCase() > b.type.toLowerCase()) ? 1 : -1 },
         typeDesc: { method: (a: PokemonModel, b: PokemonModel) => (a.type.toLowerCase() > b.type.toLowerCase()) ? -1 : 1 },
-      };
+    };
 
-    const handleChange = (event: any) => {
+    const handleFilterChange = (event: any) => {
         props.setSearchString(event.target.value);
+        props.setPage(1)
+        console.log(props.searchString)
     };
 
     const handleSortFieldChange = (event: any) => {
         console.log(event.target.value)
         setSortField(event.target.value);
     };
-
-    const handleFilter = (event: any) => {
-        axios
-            .get("http://localhost:8000/api/pokemon", { params: { filter_name: props.searchString } })
-            .then(response => {
-                console.log("Pokemon filtered");
-                props.setPokemons(response.data)
-                console.log(response)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
 
     return (
         <div className="container">
@@ -50,10 +41,7 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
                         <label htmlFor="nameFilter" className="col-form-label">Filter by name:</label>
                     </div>
                     <div className="col-auto">
-                        <input type="text" name="searchString" className="form-control" onChange={handleChange} />
-                    </div>
-                    <div className="col-auto">
-                        <button className="btn btn-primary" onClick={handleFilter}>Filter</button>
+                        <input type="text" name="searchString" className="form-control" onChange={handleFilterChange} />
                     </div>
                 </div>
                 <div className="row g-3 align-items-center filter-area">
@@ -73,6 +61,11 @@ function PokemonList(props: { pokemons: PokemonModel[], setPokemons: any, search
             <div className="pokemon-list">
                 {pokemons.sort(sortMethods[sortField].method).map((pokemonInList) => <Pokemon key={pokemonInList.id} pokemon={pokemonInList} pokemonList={pokemons} setPokemons={props.setPokemons} />)}
             </div>
+            {pokemons.length > 0 ? (
+                <Pagination page={page} setPage={props.setPage}/>
+            ) : (null)}
+            
+
         </div>
     )
 

@@ -19,7 +19,7 @@ class PokemonService
 
     public function listAll()
     {
-        $pokemon = Pokemon::all();
+        $pokemon = Pokemon::orderBy('name', 'asc')->paginate(12);
         return $pokemon;
     }
 
@@ -27,7 +27,8 @@ class PokemonService
     {
         $pokemon = DB::table('pokemon')
             ->where('name', 'like', "%$filter%")
-            ->get();
+            ->orderBy('name', 'asc')
+            ->paginate(12);
         return $pokemon;
     }
 

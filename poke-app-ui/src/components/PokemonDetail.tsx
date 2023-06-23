@@ -58,9 +58,9 @@ function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: 
                         <h5>Stats</h5>
                         <div>
                             <ul className="list-group">
-                                {detail.stats.map((stat) => {
+                                {detail.stats.map((stat, index) => {
                                     return (
-                                        <div>
+                                        <div key={index}>
                                             <li className="list-group-item">{capitalizeFirstLetter(stat.stat.name)} : {stat.base_stat}
                                                 <ProgressBar className="progress" min={0} max={255} now={Number(stat.base_stat)}></ProgressBar>
                                             </li>

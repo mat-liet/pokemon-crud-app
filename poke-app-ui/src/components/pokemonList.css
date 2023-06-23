@@ -8,3 +8,13 @@
     margin-bottom: 1.5em;
     justify-content: space-between;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.page-num {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}

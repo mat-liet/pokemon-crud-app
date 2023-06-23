@@ -11,16 +11,18 @@ function App() {
 
   const [searchString, setSearchString] = useState("");
 
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    axios.get("http://localhost:8000/api/pokemon")
+    axios.get("http://localhost:8000/api/pokemon", { params: { filter_name: searchString, page: page } })
       .then(response => {
-        console.log(response)
-        setPokemons(response.data);
+        console.log(response.data.data)
+        setPokemons(response.data.data);
       })
       .catch(error => {
         console.log(error)
       })
-  }, [setPokemons])
+  }, [setPokemons, page, searchString])
 
   return (
     <div className="App">
@@ -28,7 +30,7 @@ function App() {
       <hr />
       <PokemonForm pokemons={pokemons} setPokemons={setPokemons} searchString={searchString} />
       <hr />
-      <PokemonList pokemons={pokemons} setPokemons={setPokemons} searchString={searchString} setSearchString={setSearchString} />
+      <PokemonList pokemons={pokemons} setPokemons={setPokemons} searchString={searchString} setSearchString={setSearchString} page={page} setPage={setPage} />
     </div>
   );
 }
