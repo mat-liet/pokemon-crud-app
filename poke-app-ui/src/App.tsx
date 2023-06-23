@@ -11,10 +11,16 @@ function App() {
 
   const [searchString, setSearchString] = useState("");
 
+  const [sortField, setSortField] = useState("nameAsc");
+
+  const [addedPokemon, setAddedPokemon] = useState(false);
+
+  const [deletedPokemon, setDeletedPokemon] = useState(false);
+
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/pokemon", { params: { filter_name: searchString, page: page } })
+    axios.get("http://localhost:8000/api/pokemon", { params: { filter_name: searchString, page: page, sort_field: sortField } })
       .then(response => {
         console.log(response.data.data)
         setPokemons(response.data.data);
@@ -22,15 +28,16 @@ function App() {
       .catch(error => {
         console.log(error)
       })
-  }, [setPokemons, page, searchString])
+  }, [setPokemons, page, searchString, sortField, addedPokemon, deletedPokemon])
 
   return (
     <div className="App">
       <Header />
       <hr />
-      <PokemonForm pokemons={pokemons} setPokemons={setPokemons} searchString={searchString} />
+      <PokemonForm setPokemons={setPokemons} searchString={searchString} addedPokemon={addedPokemon} setAddedPokemon={setAddedPokemon} />
       <hr />
-      <PokemonList pokemons={pokemons} setPokemons={setPokemons} searchString={searchString} setSearchString={setSearchString} page={page} setPage={setPage} />
+      <PokemonList pokemons={pokemons} setPokemons={setPokemons} searchString={searchString}
+        setSearchString={setSearchString} page={page} setPage={setPage} setSortField={setSortField} deletedPokemon={deletedPokemon} setDeletedPokemon={setDeletedPokemon} />
     </div>
   );
 }

@@ -17,19 +17,42 @@ class PokemonService
         return $pokemon;
     }
 
-    public function listAll()
+    public function listAll(string $sortField)
     {
-        $pokemon = Pokemon::orderBy('name', 'asc')->paginate(12);
-        return $pokemon;
+        if ($sortField == 'nameDesc') {
+            return Pokemon::orderBy('name', 'desc')->paginate(12);
+        } else if ($sortField == 'typeAsc') {
+            return Pokemon::orderBy('type', 'asc')->paginate(12);
+        } else if ($sortField == 'typeDesc') {
+            return Pokemon::orderBy('type', 'desc')->paginate(12);
+        } else {
+            return Pokemon::orderBy('name', 'asc')->paginate(12);
+        }
     }
 
-    public function listFiltered(string $filter)
+    public function listFiltered(string $filter, string $sortField)
     {
-        $pokemon = DB::table('pokemon')
+        if ($sortField == 'nameDesc') {
+            return DB::table('pokemon')
+            ->where('name', 'like', "%$filter%")
+            ->orderBy('name', 'desc')
+            ->paginate(12);
+        } else if ($sortField == 'typeAsc') {
+            return DB::table('pokemon')
+            ->where('name', 'like', "%$filter%")
+            ->orderBy('type', 'asc')
+            ->paginate(12);
+        } else if ($sortField == 'typeDesc') {
+            return DB::table('pokemon')
+            ->where('name', 'like', "%$filter%")
+            ->orderBy('type', 'desc')
+            ->paginate(12);
+        } else {
+            return DB::table('pokemon')
             ->where('name', 'like', "%$filter%")
             ->orderBy('name', 'asc')
-            ->paginate(12);
-        return $pokemon;
+            ->paginate(12);;
+        }
     }
 
     public function find(string $id)

@@ -24,9 +24,9 @@ class PokemonController extends Controller
     public function list(Request $request)
     {
         if ($request->has('filter_name') && $request->filter_name !== null) {
-            return response()->json($this->pokemonService->listFiltered($request->filter_name));
+            return response()->json($this->pokemonService->listFiltered($request->filter_name, $request->sort_field));
         } else {
-            return response()->json($this->pokemonService->listAll());
+            return response()->json($this->pokemonService->listAll($request->sort_field));
         }
     }
 

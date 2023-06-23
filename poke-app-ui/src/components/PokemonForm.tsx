@@ -1,15 +1,13 @@
 import { useState } from "react";
 import axios from 'axios';
-import Pokemon from "../models/Pokemon";
+import { Modal } from "react-bootstrap";
 
-export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: any, searchString: string }) {
+export default function PokemonForm(props: {setPokemons: any, searchString: string, addedPokemon: boolean, setAddedPokemon: any }) {
     const [pokemon, setPokemon] = useState({ id: 0, name: "", type: "Bug", move: "" });
 
     const handleChange = (event: any) => {
         setPokemon({ ...pokemon, [event.target.name]: event.target.value });
     };
-
-    const pokemons = props.pokemons
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -17,12 +15,8 @@ export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: a
         axios
             .post("http://localhost:8000/api/pokemon", pokemon)
             .then(response => {
-                if (pokemon.name.toLowerCase().includes(props.searchString.toLowerCase())) {
-                    let clone = [...pokemons]
-                    clone.push(response.data)
-                    props.setPokemons(clone)
-                }
                 console.log(response)
+                props.setAddedPokemon(true)
             })
             .catch(error => {
                 console.log(error)
@@ -64,6 +58,21 @@ export default function PokemonForm(props: { pokemons: Pokemon[], setPokemons: a
                 </div>
                 <button type="submit" className="btn btn-primary">Add pokemon</button>
             </form>
+            {props.addedPokemon ? (
+                <Modal
+                show={props.addedPokemon}
+                backdrop="static"
+                onHide={() => props.setAddedPokemon(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+                centered
+            >
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                    Added Pokemon
+                </Modal.Body>
+            </Modal>
+            ) : null}
         </div>
     )
 }

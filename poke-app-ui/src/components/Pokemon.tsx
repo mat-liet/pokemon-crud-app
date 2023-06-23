@@ -4,8 +4,9 @@ import axios from 'axios';
 import EditPokemon from './EditPokemon';
 import PokemonModel from '../models/Pokemon';
 import PokemonDetail from './PokemonDetail';
+import { Modal } from 'react-bootstrap';
 
-function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], setPokemons: any }) {
+function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], setPokemons: any, setDeletedPokemon: any }) {
     const pokemon = props.pokemon
 
     const pokemons = props.pokemonList
@@ -30,8 +31,7 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
             .delete(url)
             .then(response => {
                 console.log(response)
-                const res = pokemons.filter((obj: { id: any; }) => obj.id !== id);
-                props.setPokemons(res)
+                props.setDeletedPokemon(true)
             })
             .catch(error => {
                 console.log(error)
@@ -50,11 +50,12 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
                     <p className="card-text">Type: {pokemon.type}</p>
                     <p className="card-text">Signature move: {pokemon.move}</p>
                     <button className="btn btn-success btn-pokemon-card" onClick={() => setShowModal(true)}>More info</button>
-                    <PokemonDetail showModal={showModal} setShowModal={setShowModal} pokemon={pokemon}/>
+                    <PokemonDetail showModal={showModal} setShowModal={setShowModal} pokemon={pokemon} />
                     <button className="btn btn-primary btn-pokemon-card" onClick={handleEdit}>Edit</button>
                     <button className="btn btn-danger btn-pokemon-card" onClick={() => handleDelete(pokemon.id)}>Delete</button>
                 </div>
             </div>
+
         )
     }
 }
