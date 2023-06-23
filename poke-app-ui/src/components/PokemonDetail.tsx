@@ -1,35 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './PokemonDetail.css';
 import Modal from 'react-bootstrap/Modal';
 import Pokemon from '../models/Pokemon';
-import axios from 'axios';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import PokemonDetailModel from '../models/PokemonDetail';
 
-function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: Pokemon }) {
+function PokemonDetail(props: { showModal: boolean, setShowModal: any, pokemon: Pokemon, erroredResponse: boolean, detail: PokemonDetailModel }) {
 
     const pokemon: Pokemon = props.pokemon
 
-    const [detail, setDetail] = useState({ weight: "", height: "", stats: [{ base_stat: "", stat: { name: "" } }], sprites: { front_default: "" } });
-
-    const [erroredResponse, setErroredResponse] = useState(false);
-
-    useEffect(() => {
-        let url = `https://pokeapi.co/api/v2/pokemon/${pokemon.name.toLowerCase()}/`
-        axios.get(url)
-            .then(response => {
-                console.log(response)
-                setDetail(response.data)
-            })
-            .catch(error => {
-                setErroredResponse(true)
-            })
-    }, [setDetail])
+    const detail: PokemonDetailModel = props.detail
 
     function capitalizeFirstLetter(str: string): string {
         return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
-    if (!erroredResponse) {
+    if (!props.erroredResponse) {
         return (
             <Modal
                 size="lg"

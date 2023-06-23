@@ -4,7 +4,6 @@ import axios from 'axios';
 import EditPokemon from './EditPokemon';
 import PokemonModel from '../models/Pokemon';
 import PokemonDetail from './PokemonDetail';
-import { Modal } from 'react-bootstrap';
 
 function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], setPokemons: any, setDeletedPokemon: any }) {
     const pokemon = props.pokemon
@@ -15,9 +14,27 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
 
     const [showModal, setShowModal] = useState(false);
 
+    const [detail, setDetail] = useState({ weight: "", height: "", stats: [{ base_stat: "", stat: { name: "" } }], sprites: { front_default: "" } });
+
+    const [erroredResponse, setErroredResponse] = useState(false);
+
     const handleEdit = (event: any) => {
         console.log("Edit button clicked")
         setEdit(true)
+    }
+
+    function handleMoreInfo() {
+        let url = `https://pokeapi.co/api/v2/pokemon/${pokemon.name.toLowerCase()}/`
+        axios.get(url)
+            .then(response => {
+                // console.log(response)
+                setDetail(response.data)
+                setShowModal(true)
+            })
+            .catch(error => {
+                setErroredResponse(true)
+                setShowModal(true)
+            })
     }
 
     function setShowEdit(showEdit: boolean) {
@@ -49,8 +66,11 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
                     <h5 className="card-title">Name: {pokemon.name}</h5>
                     <p className="card-text">Type: {pokemon.type}</p>
                     <p className="card-text">Signature move: {pokemon.move}</p>
-                    <button className="btn btn-success btn-pokemon-card" onClick={() => setShowModal(true)}>More info</button>
-                    <PokemonDetail showModal={showModal} setShowModal={setShowModal} pokemon={pokemon} />
+                    <button className="btn btn-success btn-pokemon-card" onClick={handleMoreInfo}>More info</button>
+                    {showModal ?
+                        <PokemonDetail setShowModal={setShowModal} pokemon={pokemon} detail={detail} showModal={showModal} erroredResponse={erroredResponse} />
+                        : false
+                    }
                     <button className="btn btn-primary btn-pokemon-card" onClick={handleEdit}>Edit</button>
                     <button className="btn btn-danger btn-pokemon-card" onClick={() => handleDelete(pokemon.id)}>Delete</button>
                 </div>

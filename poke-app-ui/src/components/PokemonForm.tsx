@@ -72,7 +72,7 @@ export default function PokemonForm(props: {setPokemons: any, searchString: stri
                     Added Pokemon
                 </Modal.Body>
             </Modal>
-            ) : null}
+            ) : false}
         </div>
     )
 }

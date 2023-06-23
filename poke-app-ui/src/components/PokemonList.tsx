@@ -72,7 +72,7 @@ function PokemonList(props: {
                         Deleted pokemon!
                     </Modal.Body>
                 </Modal>
-            ) : null}
+            ) : false }
         </div>
     )
 
