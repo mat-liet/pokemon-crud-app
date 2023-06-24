@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
 import Header from './components/Header';
 import PokemonForm from './components/PokemonForm';
 import PokemonList from './components/PokemonList';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 
