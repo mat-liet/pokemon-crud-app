@@ -27,7 +27,7 @@ function Pokemon(props: { pokemon: PokemonModel, pokemonList: PokemonModel[], se
         let url = `https://pokeapi.co/api/v2/pokemon/${pokemon.name.toLowerCase()}/`
         axios.get(url)
             .then(response => {
-                // console.log(response)
+                console.log(response)
                 setDetail(response.data)
                 setShowModal(true)
             })

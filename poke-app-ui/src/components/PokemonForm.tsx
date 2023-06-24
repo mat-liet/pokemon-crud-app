@@ -2,12 +2,14 @@ import { useState } from "react";
 import axios from 'axios';
 import { Modal } from "react-bootstrap";
 
-export default function PokemonForm(props: {setPokemons: any, searchString: string, addedPokemon: boolean, setAddedPokemon: any }) {
+export default function PokemonForm() {
     const [pokemon, setPokemon] = useState({ id: 0, name: "", type: "Bug", move: "" });
 
     const handleChange = (event: any) => {
         setPokemon({ ...pokemon, [event.target.name]: event.target.value });
     };
+
+    const [addedPokemon, setAddedPokemon] = useState(false);
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -16,7 +18,7 @@ export default function PokemonForm(props: {setPokemons: any, searchString: stri
             .post("http://localhost:8000/api/pokemon", pokemon)
             .then(response => {
                 console.log(response)
-                props.setAddedPokemon(true)
+                setAddedPokemon(true)
             })
             .catch(error => {
                 console.log(error)
@@ -58,11 +60,11 @@ export default function PokemonForm(props: {setPokemons: any, searchString: stri
                 </div>
                 <button type="submit" className="btn btn-primary">Add pokemon</button>
             </form>
-            {props.addedPokemon ? (
+            {addedPokemon ? (
                 <Modal
-                show={props.addedPokemon}
+                show={addedPokemon}
                 backdrop="static"
-                onHide={() => props.setAddedPokemon(false)}
+                onHide={() => setAddedPokemon(false)}
                 aria-labelledby="example-modal-sizes-title-lg"
                 centered
             >

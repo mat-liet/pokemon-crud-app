@@ -3,27 +3,42 @@ import './PokemonList.css';
 import PokemonModel from '../models/Pokemon';
 import Pagination from './Pagination';
 import { Modal } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function PokemonList(props: {
-    pokemons: PokemonModel[], setPokemons: any, searchString: string,
-    setSearchString: any, page: Number, setPage: any, setSortField: any,
-    deletedPokemon: boolean, setDeletedPokemon: any
-}) {
+function PokemonList() {
 
-    const pokemons: PokemonModel[] = props.pokemons
+    const [pokemons, setPokemons] = useState([{ id: 0, name: "", type: "", move: "" }]);
 
-    const page: Number = props.page
+    const [searchString, setSearchString] = useState("");
+
+    const [sortField, setSortField] = useState("nameAsc");
+
+    const [deletedPokemon, setDeletedPokemon] = useState(false);
+
+    const [total, setTotal] = useState(0);
+
+    const [page, setPage] = useState(1);
+
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/pokemon", { params: { filter_name: searchString, page: page, sort_field: sortField } })
+            .then(response => {
+                setTotal(response.data['total'])
+                setPokemons(response.data.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [setPokemons, page, searchString, sortField, deletedPokemon])
 
     const handleFilterChange = (event: any) => {
-        props.setSearchString(event.target.value)
-        props.setPage(1)
-        console.log(props.searchString)
+        setSearchString(event.target.value)
+        setPage(1)
     };
 
     const handleSortFieldChange = (event: any) => {
-        console.log(event.target.value)
-        props.setSortField(event.target.value)
-        props.setPage(1)
+        setSortField(event.target.value)
+        setPage(1)
     };
 
     return (
@@ -53,16 +68,16 @@ function PokemonList(props: {
             </div>
             <div className="pokemon-list">
                 {pokemons.map((pokemonInList) => <Pokemon key={pokemonInList.id} pokemon={pokemonInList} pokemonList={pokemons}
-                    setPokemons={props.setPokemons} setDeletedPokemon={props.setDeletedPokemon} />)}
+                    setPokemons={setPokemons} setDeletedPokemon={setDeletedPokemon} />)}
             </div>
             {pokemons.length > 0 ? (
-                <Pagination page={page} setPage={props.setPage} />
+                <Pagination page={page} setPage={setPage} total={total} />
             ) : (null)}
-            {props.deletedPokemon ? (
+            {deletedPokemon ? (
                 <Modal
-                    show={props.deletedPokemon}
+                    show={deletedPokemon}
                     backdrop="static"
-                    onHide={() => props.setDeletedPokemon(false)}
+                    onHide={() => setDeletedPokemon(false)}
                     aria-labelledby="example-modal-sizes-title-lg"
                     centered
                 >
@@ -72,7 +87,7 @@ function PokemonList(props: {
                         Deleted pokemon!
                     </Modal.Body>
                 </Modal>
-            ) : false }
+            ) : false}
         </div>
     )
 
