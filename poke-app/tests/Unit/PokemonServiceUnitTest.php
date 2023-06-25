@@ -20,7 +20,7 @@ class PokemonServiceUnitTest extends TestCase
     {
         $service = new PokemonService();
         Pokemon::factory()->count(4)->create();
-        $pokemon = $service->listAll();
+        $pokemon = $service->listAll("nameAsc");
         $this->assertCount(4, $pokemon);
     }
 
