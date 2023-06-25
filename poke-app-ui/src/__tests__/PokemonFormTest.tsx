@@ -3,7 +3,7 @@ import PokemonForm from '../components/PokemonForm';
 import userEvent from '@testing-library/user-event';
 
 test("Pokemon form renders correctly", async () => {
-    render(<PokemonForm setPokemons={undefined} searchString={''} addedPokemon={false} setAddedPokemon={undefined}/>);
+    render(<PokemonForm />);
 
     const name = screen.getByText(/Pokemon name/i);
     const type = screen.getByText(/Pokemon type/i);

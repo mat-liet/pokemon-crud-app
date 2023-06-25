@@ -85,21 +85,19 @@ function PokemonList() {
             {pokemons.length > 0 && !loading ? (
                 <Pagination page={page} setPage={setPage} total={total} />
             ) : false}
-            {deletedPokemon ? (
-                <Modal
-                    show={deletedPokemon}
-                    backdrop="static"
-                    onHide={() => setDeletedPokemon(false)}
-                    aria-labelledby="example-modal-sizes-title-lg"
-                    centered
-                >
-                    <Modal.Header closeButton>
-                    </Modal.Header>
-                    <Modal.Body>
-                        Deleted pokemon!
-                    </Modal.Body>
-                </Modal>
-            ) : false}
+            <Modal
+                show={deletedPokemon}
+                backdrop="static"
+                onHide={() => setDeletedPokemon(false)}
+                aria-labelledby="example-modal-sizes-title-lg"
+                centered
+            >
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                    Deleted pokemon!
+                </Modal.Body>
+            </Modal>
         </div>
     )
 

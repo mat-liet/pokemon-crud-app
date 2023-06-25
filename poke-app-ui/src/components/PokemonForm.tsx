@@ -30,7 +30,7 @@ export default function PokemonForm() {
             <form action="submit" onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Pokemon name</label>
-                    <input type="text" placeholder="Pokemon name" className="form-control" name="name" onChange={handleChange} required/>
+                    <input type="text" placeholder="Pokemon name" className="form-control" name="name" onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="type" className="form-label">Pokemon type</label>
@@ -60,8 +60,7 @@ export default function PokemonForm() {
                 </div>
                 <button type="submit" className="btn btn-primary">Add pokemon</button>
             </form>
-            {addedPokemon ? (
-                <Modal
+            <Modal
                 show={addedPokemon}
                 backdrop="static"
                 onHide={() => setAddedPokemon(false)}
@@ -74,7 +73,6 @@ export default function PokemonForm() {
                     Added Pokemon
                 </Modal.Body>
             </Modal>
-            ) : false}
         </div>
     )
 }
