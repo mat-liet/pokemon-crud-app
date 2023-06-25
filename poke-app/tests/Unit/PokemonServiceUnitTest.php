@@ -53,13 +53,13 @@ class PokemonServiceUnitTest extends TestCase
 
         $service = new PokemonService();
         
-        $pokemon = $service->listFiltered('TestPokemon');
+        $pokemon = $service->listFiltered('TestPokemon', 'nameAsc');
         $this->assertCount(4, $pokemon);
 
-        $pokemon = $service->listFiltered('pokemon1');
+        $pokemon = $service->listFiltered('pokemon1', 'nameAsc');
         $this->assertCount(1, $pokemon);
 
-        $pokemon = $service->listFiltered('wooo');
+        $pokemon = $service->listFiltered('wooo','nameAsc');
         $this->assertCount(0, $pokemon);
     }
 

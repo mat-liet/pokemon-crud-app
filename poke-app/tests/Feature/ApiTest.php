@@ -25,7 +25,7 @@ class ApiTest extends TestCase
     public function testGetAllEndpoint(): void
     {
         $pokemon = Pokemon::factory()->count(4)->create();
-        $response = $this->get('/api/pokemon');
+        $response = $this->get('/api/pokemon?sort_field=nameAsc');
         $response->assertStatus(200);
         $response->assertJsonCount(4);
     }
@@ -114,17 +114,17 @@ class ApiTest extends TestCase
         ]);
 
         //Filter on the first pokemon name
-        $response = $this->get('/api/pokemon?filter_name=pokemon1');
+        $response = $this->get('/api/pokemon?filter_name=pokemon1&sort_field=nameAsc');
         $response->assertStatus(200);
         $response->assertJsonCount(1);
 
         //Filter so that all return
-        $response = $this->get('/api/pokemon?filter_name=TestPokemon');
+        $response = $this->get('/api/pokemon?filter_name=TestPokemon&sort_field=nameAsc');
         $response->assertStatus(200);
         $response->assertJsonCount(4);
 
         //Filter so that none return
-        $response = $this->get('/api/pokemon?filter_name=blahblah');
+        $response = $this->get('/api/pokemon?filter_name=blahblah&sort_field=nameAsc');
         $response->assertStatus(200);
         $response->assertJsonCount(0);
     }
