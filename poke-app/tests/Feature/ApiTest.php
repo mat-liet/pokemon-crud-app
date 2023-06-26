@@ -55,11 +55,7 @@ class ApiTest extends TestCase
         //We update the pokemon to these values
         $response = $this->putJson('/api/pokemon/1', ['name' => 'TestValue', 'type' => 'Test', 'move' => 'Test move']);
         $response->assertStatus(200);
-
-        // Now we get the pokemon we created and check it equals what we updated it to
-        $response = $this->get('/api/pokemon/1');
         $response
-            ->assertStatus(200)
             ->assertExactJson([
                 'id' => 1,
                 'name' => 'TestValue',

@@ -34,7 +34,7 @@ class PokemonController extends Controller
     {
         $pokemon = $this->pokemonService->find($id);
         if ($pokemon !== null) {
-            return response()->json($this->pokemonService->find($id));
+            return response()->json($pokemon);
         } else {
             return response()->json([
                 'message' => "Pokemon with id $id not found."
@@ -44,11 +44,9 @@ class PokemonController extends Controller
 
     public function update(Request $request, $id)
     {
-        $updatedSuccessfully = $this->pokemonService->update($id, $request->name, $request->type, $request->move);
-        if ($updatedSuccessfully) {
-            return response()->json([
-                'message' => "Pokemon with id $id updated."
-            ], 200);
+        $pokemon = $this->pokemonService->update($id, $request->name, $request->type, $request->move);
+        if ($pokemon !== null) {
+            return response()->json($pokemon);
         } else {
             return response()->json([
                 'message' => "Pokemon with id $id not found."

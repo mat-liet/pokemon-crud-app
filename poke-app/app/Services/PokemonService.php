@@ -51,7 +51,7 @@ class PokemonService
             return DB::table('pokemon')
             ->where('name', 'like', "%$filter%")
             ->orderBy('name', 'asc')
-            ->paginate(12);;
+            ->paginate(12);
         }
     }
 
@@ -73,9 +73,9 @@ class PokemonService
             $pokemon->type = is_null($type) ? $pokemon->type : $type;
             $pokemon->move = is_null($move) ? $pokemon->move : $move;
             $pokemon->save();
-            return true;
+            return $pokemon;
         } else {
-            return false;
+            return null;
         }
     }
 
