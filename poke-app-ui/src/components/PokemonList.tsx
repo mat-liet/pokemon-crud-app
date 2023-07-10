@@ -11,7 +11,7 @@ function PokemonList() {
 
     const [searchString, setSearchString] = useState("");
 
-    const [sortField, setSortField] = useState("nameAsc");
+    const [sortField, setSortField] = useState("name_asc");
 
     const [deletedPokemon, setDeletedPokemon] = useState(false);
 
@@ -60,11 +60,11 @@ function PokemonList() {
                         <label htmlFor="nameFilter" className="col-form-label">Sort by</label>
                     </div>
                     <div className="col-auto">
-                        <select className="form-select" name="sortField" defaultValue={"nameAsc"} onChange={handleSortFieldChange}>
-                            <option value="nameAsc">Name (Ascending)</option>
-                            <option value="nameDesc">Name (Descending)</option>
-                            <option value="typeAsc">Type (Ascending)</option>
-                            <option value="typeDesc">Type (Descending)</option>
+                        <select className="form-select" name="sortField" defaultValue={"name_asc"} onChange={handleSortFieldChange}>
+                            <option value="name_asc">Name (Ascending)</option>
+                            <option value="name_desc">Name (Descending)</option>
+                            <option value="type_asc">Type (Ascending)</option>
+                            <option value="type_desc">Type (Descending)</option>
                         </select>
                     </div>
                 </div>
