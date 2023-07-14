@@ -1,7 +1,9 @@
 # pokemon-crud-app
 This is a web-app that contains allows a user to look through the database of pokemon and add a custom pokemon. 
 
-This was built using React and PHP Laravel originally. There is now also a Java backend.
+This was built using React and PHP Laravel originally. 
+
+There is now also a Java and Nodejs backend.
 
 ## Usage
 
