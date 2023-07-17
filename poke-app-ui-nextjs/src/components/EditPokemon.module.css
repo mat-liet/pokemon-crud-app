@@ -1,0 +1,13 @@
+.card {
+    margin: .5em;
+    padding: 1em;
+    flex: 0 1 32%
+}
+
+.cardBody {
+    text-align: center;
+}
+
+.btnEdit {
+    margin: .75em;
+}

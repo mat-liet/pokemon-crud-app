@@ -1,0 +1,5 @@
+.filter-sort-container {
+    display: flex;
+    margin-bottom: 1.5em;
+    justify-content: space-between;
+}
