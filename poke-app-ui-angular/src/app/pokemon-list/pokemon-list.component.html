@@ -1,0 +1,16 @@
+<div class="container">
+  <app-filter-sort 
+    [filterString]="filterString" 
+    (newFilterEvent)="setNewPageDataFilter($event)"
+    [sortString]="sortString" 
+    (newSortEvent)="setNewPageDataSort($event)"
+    >
+  </app-filter-sort>
+  <div class="pokemon-list">
+    <app-pokemon
+      *ngFor="let pokemon of loadedPokemon"
+      [pokemon]="pokemon"
+    ></app-pokemon>
+  </div>
+  <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (newPage)="setNewPageData($event)"></app-pagination>
+</div>

@@ -2,9 +2,6 @@ package com.crud.pokeapp.service;
 
 import com.crud.pokeapp.api.model.Pokemon;
 import com.crud.pokeapp.api.model.PokemonResponse;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 public interface PokemonService {
 

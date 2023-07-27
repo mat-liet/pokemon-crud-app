@@ -1,0 +1,23 @@
+<div class="filter-sort-container container">
+    <div class="row g-3 align-items-center filter-area">
+        <div class="col-auto">
+            <label htmlFor="nameFilter" class="col-form-label">Filter by name:</label>
+        </div>
+        <div class="col-auto">
+            <input type="text" name="searchString" class="form-control" [(ngModel)]="filterString" (ngModelChange)="getFilteredResults($event)" />
+        </div>
+    </div>
+    <div class="row g-3 align-items-center filter-area">
+        <div class="col-auto">
+            <label htmlFor="nameFilter" class="col-form-label">Sort by</label>
+        </div>
+        <div class="col-auto">
+            <select class="form-select" name="sortField" [(ngModel)]="sortString" (ngModelChange)="getSortedEvents($event)">
+                <option value="name_asc">Name (Ascending)</option>
+                <option value="name_desc">Name (Descending)</option>
+                <option value="type_asc">Type (Ascending)</option>
+                <option value="type_desc">Type (Descending)</option>
+            </select>
+        </div>
+    </div>
+</div>

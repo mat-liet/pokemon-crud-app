@@ -1,0 +1,11 @@
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <button class="page-link" [ngClass]="{disabled: currentPage <= 1}" (click)="onPageChange(currentPage - 1)">Previous</button>
+      </li>
+      <li class="page-item" ><span class="page-link" >{{ currentPage }}</span></li>
+      <li class="page-item">
+        <button class="page-link" [ngClass]="{disabled: isNextDisabled()}" (click)="onPageChange(currentPage + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>

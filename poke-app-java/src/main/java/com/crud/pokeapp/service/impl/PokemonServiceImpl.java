@@ -48,6 +48,9 @@ public class PokemonServiceImpl implements PokemonService {
         String sortDir = sortByAndDir[1];
         Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
                 : Sort.by(sortBy).descending();
+        if (sortBy.equalsIgnoreCase("type")) {
+            sort = sort.and(Sort.by("name").ascending());
+        }
 
         Pageable pageable = PageRequest.of(page, 12, sort);
 

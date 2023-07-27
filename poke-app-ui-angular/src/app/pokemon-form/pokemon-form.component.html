@@ -1,0 +1,39 @@
+<div class="container">
+  <form [formGroup]="newPokemonForm" (ngSubmit)="onAddPokemon()">
+    <div class="mb-3">
+      <label htmlFor="name" class="form-label">Pokemon name</label>
+      <input
+        type="text"
+        placeholder="Pokemon name"
+        class="form-control"
+        name="name"
+        formControlName="name"
+      />
+      <span
+        *ngIf="!newPokemonForm.get('name')?.valid && newPokemonForm.get('name')?.touched" 
+        class="help-block">Please enter a valid name!
+      </span>
+    </div>
+    <div class="mb-3">
+      <label htmlFor="type" class="form-label">Pokemon type</label>
+      <select class="form-select" name="type" formControlName="type">
+        <option *ngFor="let type of types" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label htmlFor="moves" class="form-label">Signature move</label>
+      <input
+        type="text"
+        placeholder="Signature move"
+        class="form-control"
+        name="move"
+        formControlName="move"
+      />
+      <span
+        *ngIf="!newPokemonForm.get('move')?.valid && newPokemonForm.get('move')?.touched" 
+        class="help-block">Please enter a valid move!
+      </span>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!newPokemonForm.valid">Add pokemon</button>
+  </form>
+</div>

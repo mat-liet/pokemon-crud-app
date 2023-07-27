@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.img-pokeball {
+  height: 5em;
+  width: 5em;
+}

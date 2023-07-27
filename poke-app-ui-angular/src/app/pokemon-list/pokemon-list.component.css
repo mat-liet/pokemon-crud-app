@@ -1,0 +1,14 @@
+.pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+
+.page-num {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+}
